@@ -1,3 +1,17 @@
+<!--ARRAY OF INFORMATION ABOUT USERS-->
+$users = [
+    array("id" => 1, "login" => "user1", "password" => "password1", "full_name" => "User 1"),
+    array("id" => 2, "login" => "user2", "password" => "password2", "full_name" => "User 2"),
+    array("id" => 3, "login" => "user3", "password" => "password3", "full_name" => "User 3"),
+];
+
+<?php
+function userExists($login, $password, $users)
+foreach ($users as $___) {
+    echo "$___";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,12 +46,30 @@
                             <li><a href="#">Edit my profile</a></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
+                         
+                    <?php
+                    $login_name = $_POST["login"];
+                
+                    if ($login_name == NULL)
+                        echo "Hello, there!";
+                    else { 
+                        echo "Hello, ";
+                        echo $login_name;
+                        echo "!";
+                        echo nl2br("\nYour rot13'd login is: ");
+                        echo str_rot13($login_name); 
+                        echo nl2br("\nThe length of your login is: ");
+                        echo strlen($login_name);
+                    }
+                    ?>
+                        
                     </div>
                     <div id="links">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.php">Home</a></li>
                             <li><a href="profile.html">Statuses</a></li>
                             <li><a href="users.html">Users</a></li>
+                            <li><a href="login.php">Login</a></li>
                             <li><a href="octopus-fitness.html">About</a></li>
                         </ul>
                     </div>
@@ -250,7 +282,7 @@
             <footer>
                 <div id="footerLinks">
                   <ul>
-                      <li><a href="index.html">Home</a></li>
+                      <li><a href="index.php">Home</a></li>
                       <li><a href="profile.html">Statuses</a></li>
                       <li><a href="users.html">Users</a></li>
                       <li><a href="octopus-fitness.html">About</a></li>
@@ -261,4 +293,3 @@
         </div>
     </body>
 </html>
-B
