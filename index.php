@@ -1,14 +1,21 @@
-<!--ARRAY OF INFORMATION ABOUT USERS-->
+<!--PHP ASSOCIATIVE ARRAY OF INFORMATION ABOUT USERS-->
+<?php
+    $login = $_POST["login"];
+    $password = $_POST["password"];
+
 $users = [
     array("id" => 1, "login" => "user1", "password" => "password1", "full_name" => "User 1"),
     array("id" => 2, "login" => "user2", "password" => "password2", "full_name" => "User 2"),
     array("id" => 3, "login" => "user3", "password" => "password3", "full_name" => "User 3"),
 ];
 
-<?php
-function userExists($login, $password, $users)
-foreach ($users as $___) {
-    echo "$___";
+// Return array representing user if user exists, else return false
+function userExists($login, $password, $users) {
+    foreach($users as &$elem) {
+        if ($elem['login'] == $login && $elem['password'] == $password) {
+            return $elem['id'];}
+    }    
+    return -1;
 }
 ?>
 
@@ -46,22 +53,23 @@ foreach ($users as $___) {
                             <li><a href="#">Edit my profile</a></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
-                         
+                        
+                    <!--EXPECTED USER BEHAVIOR USING PHP-->     
                     <?php
-                    $login_name = $_POST["login"];
-                
-                    if ($login_name == NULL)
+                    if (empty($login) || empty($password)) {
                         echo "Hello, there!";
-                    else { 
-                        echo "Hello, ";
-                        echo $login_name;
-                        echo "!";
-                        echo nl2br("\nYour rot13'd login is: ");
-                        echo str_rot13($login_name); 
-                        echo nl2br("\nThe length of your login is: ");
-                        echo strlen($login_name);
+                    } else {
+                        $user_exists = userExists($login, $password, $users);
+                            if($user_exists < 0) {
+                                echo "<br>Hello, there!";
+                                echo "<br><font color='red'>Invalid credentials</font>";
+                            } else {
+                                echo "<br>Hello, " . $users[$user_exists-1]['full_name'] . "!";
+                                echo "<br>Your rot13'd login is: " . str_rot13($login);
+                                echo "<br>The length of your login is: " . strlen($login);
+                            }
                     }
-                    ?>
+                    ?>    
                         
                     </div>
                     <div id="links">
